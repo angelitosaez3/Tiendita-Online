@@ -6,16 +6,16 @@ services:
                dockerfile: Dockerfile
        container_name: php_app
        volumes:
-          - ./php/online-shopping-system:/var/www/html/
-       depends_on: 
-         - db  
+          - ./php/online-shopping-system:/var/www/html
+       depends_on:
+         - db
        ports:
          - 8008:80
   db:
           container_name: mysqli
-          image: mysql:latest
+          image: mysql:8.0.32
           command: --default-authentication-plugin=mysql_native_password
-          restart: always  
+          restart: always
           volumes:
              - ./php/online-shopping-system/database/onlineshop.sql:/docker-entrypoint-initdb.d/onlineshop.sql
           environment:
@@ -25,3 +25,4 @@ services:
             MYSQL_PASSWORD: admin
           ports:
            - 6033:3306
+
